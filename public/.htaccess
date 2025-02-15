@@ -1,0 +1,25 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Set base directory
+    RewriteBase /Eventbrite-Clone/
+
+    # Prevent direct access to PHP files except index.php
+    RewriteCond %{THE_REQUEST} /([^/]+\.php) [NC]
+    RewriteCond %{REQUEST_FILENAME} !index.php
+    RewriteRule ^ - [F,L]
+
+    # If the requested file or directory doesn't exist
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Rewrite all requests to index.php
+    RewriteRule ^(.*)$ index.php [L,QSA]
+
+    # Block directory listing
+    Options -Indexes
+
+    # Ensure proper character encoding
+    AddDefaultCharset UTF-8
+</IfModule>
+    
